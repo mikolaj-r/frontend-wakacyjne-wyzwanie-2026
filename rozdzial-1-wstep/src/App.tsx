@@ -1,5 +1,6 @@
 import { Sun } from 'lucide-react'
 import './App.css'
+import ProjectCard from './components/ProjectCard'
 
 function App() {
   
@@ -13,7 +14,16 @@ function App() {
       <main className='flex justify-center items-center text-center py-16 px-8'>
         <section className='flex flex-col justify-center items-center border border-gray-200 rounded-lg p-16 shadow-sm w-full max-w-3xl'>
           <h2>Zadanie domowe</h2>
-
+            <ProjectCard
+              title={"Frontend Project"}
+              description={"Short description of a project"}
+              technologies={[
+                { id: "ts", name: "TypeScript" },
+                { id: "rct", name: "React" },
+                { id: "nxt", name: "Next.js" },
+                { id: "tcss", name: "Tailwind CSS" },
+              ]}
+            />
         </section>
       </main>
 
