@@ -8,6 +8,8 @@ import {
   DialogContent, DialogHeader, DialogTitle,
 } from "@/src/components/ui/dialog"
 import { UserProfileDetails } from "@/src/components/UserProfileDetails";
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/src/components/ui/empty";
+import { UserRoundXIcon } from "lucide-react";
 
 export default function UserModal() {
   const { id } = useParams<{ id: string; }>();
@@ -28,16 +30,20 @@ export default function UserModal() {
 
         {user
           ? <UserProfileDetails user={user} />
-          : <>
-              {/*
-                Dodaj komponent 'Empty' z shadcn
-                tak jak w error.tsx i not-found.tsx.
-                Dostosuj go do modalu
-              */}
-              Brak użytkownika
-            </>
+          :
+          <Empty className="h-full bg-muted/60 max-w-md mx-auto">
+            <EmptyHeader>
+              <EmptyMedia variant="icon" className="bg-destructive/10">
+                <UserRoundXIcon className="text-destructive size-5" />
+              </EmptyMedia>
+              <EmptyTitle className="text-xl">Wystąpił błąd</EmptyTitle>
+              <EmptyDescription className="max-w-xs text-pretty leading-tight">
+               Nie znaleziono użytkownika 
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
         }
-      </DialogContent>
+        </DialogContent>
     </Dialog>
   )
 }

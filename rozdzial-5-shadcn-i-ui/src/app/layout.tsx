@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Figtree } from "next/font/google";
 import { PropsWithChildren } from "react";
 import "./globals.css";
 import Link from "next/link";
 import { NAV_LINKS } from "@/src/config";
+import { cn } from "@/src/lib/utils";
+import Navbar from "../components/Navbar";
+
+const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,21 +28,11 @@ export default function RootLayout({ children, modal }: PropsWithChildren & { mo
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", figtree.variable)}
     >
       <body className="min-h-full flex flex-col">
       <div>
-        <nav className="inset-0 py-6 grid place-items-center">
-          <ul className="flex items-center gap-4">
-            {NAV_LINKS.map(link => (
-              // Obsługa zdarzenia 'hover'
-              <li key={link.id} className="transition-colors hover:text-blue-500">
-                <Link href={link.href}>{link.title}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
+        <Navbar />
         <main className="py-16 max-w-4xl mx-auto">{children}</main>
         {modal}
       </div>
